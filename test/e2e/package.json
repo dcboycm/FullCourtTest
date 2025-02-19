@@ -1,0 +1,22 @@
+{
+  "name": "full-court-test",
+  "version": "1.0.0",
+  "description": "FullCourtTest - NBA AQA Interview Project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "ENV=qa mocha tests/*.js --reporter mocha-multi-reporters --reporter-options configFile=mocha-config.json",
+    "merge-reports": "jrm ./reports -o ./reports/junit-report.xml"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^1.7.7",
+    "chai": "^5.1.2",
+    "dotenv": "^16.4.7",
+    "junit-report-merger": "^7.0.0",
+    "mocha": "^10.7.3",
+    "mocha-junit-reporter": "^2.2.1",
+    "mocha-multi-reporters": "^1.5.1"
+  }
+}
