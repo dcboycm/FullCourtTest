@@ -53,7 +53,7 @@ describe("🐶 Broken Petstore API Tests", function () {
         expect(response.status).to.equal(200);
     });
 
-    it.only("Should verify pet is deleted", async function () {
+    it("Should verify pet is deleted", async function () {
         const petName = "DeletedPet";
         const petStatus = "deleted";
         const createPetResponse = await createPet(petName, petStatus);
