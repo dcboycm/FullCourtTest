@@ -19,4 +19,11 @@ const apiClient = axios.create({
 // - updatePet(petData)
 // - deletePet(petId)
 
-export default apiClient;
+export default class PetClient {
+    static apiClient = apiClient
+
+   static async createPet(petData) {
+    return this.apiClient.post('pet', petData)
+   }
+}
+
