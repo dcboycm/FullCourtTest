@@ -22,13 +22,12 @@ const apiClient = axios.create({
 export default class PetClient {
     static apiClient = apiClient
 
-   static async createPet(petData) {
+   static async postCreatePet(petData) {
     try {
         const response = await this.apiClient.post('pet', petData)
         return response
     } catch (error) {
-        console.error('Error creating pet:', error)
-        throw error
+        throw new Error(`Error creating pet: ${error.message}`)
     }
    }
 
@@ -37,9 +36,22 @@ export default class PetClient {
         const response = await this.apiClient.get(`pet/${petId}`)
         return response
     } catch (error) {
-        console.error('Error retrieving pet:', error)
-        throw error
+        throw new Error(`Error retrieving pet: ${error.message}`)
     }
    }
-   
+
+   static async postUpdatePet(petId,status) {
+    try {
+        // 415 for form data payload
+        // const formData = new FormData()
+        // formData.append('status', encodeURIComponent(status))
+
+        // 415 for this formatted data
+        const data = `status=${encodeURIComponent(status)}`
+        const response = await this.apiClient.post(`pet/${petId}`, data)
+        return response
+    } catch (error) {
+        throw new Error(`Error updating pet: ${error.message}`)
+    }
+   }
 }

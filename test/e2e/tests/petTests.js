@@ -4,10 +4,21 @@ import PetClient from "../utils/apiClient.js";
 describe("🐾 Petstore API Tests", function () {
     let petId;
 
+    async function createPet(name, status) {
+        const response = await PetClient.postCreatePet({
+            name: name,
+            status: status
+        })
+        expect(response.status).to.equal(200);
+        expect(response.data).to.have.property('id');
+
+        return response.data;
+    }
+
     it("Should create a new pet", async function () {
         const petName = "Fluffy";
         const petStatus = "available";
-        const response = await PetClient.createPet({
+        const response = await PetClient.postCreatePet({
             name: petName,
             status: petStatus
         })
@@ -23,22 +34,26 @@ describe("🐾 Petstore API Tests", function () {
     it("Should retrieve the created pet", async function () {
         const petName = "Scrappy";
         const petStatus = "pending";
-        const createPetResponse = await PetClient.createPet({
-            name: petName,
-            status: petStatus
-        })
-        expect(createPetResponse.status).to.equal(200);
-        expect(createPetResponse.data).to.have.property('id');
-        petId = createPetResponse.data.id;
+        const createPetResponse = await createPet(petName, petStatus);
+        petId = createPetResponse.id;
 
         const retrievePetResponse = await PetClient.getPetById(petId);
+        // We are getting 404 error for retrieving newly created pet
+        // should that be the case?
         expect(retrievePetResponse).to.have.status(200);
         expect(retrievePetResponse.data.name).to.equal(petName);
         expect(retrievePetResponse.data.status).to.equal(petStatus);
     });
 
     it("Should update the pet's status", async function () {
+        const petName = "Scooby";
+        const petStatus = "done";
+        const createPetResponse = await createPet(petName, petStatus);
+        petId = createPetResponse.id;
 
+        const newPetStatus = "adopted";
+        const updatedPetResponse = await PetClient.postUpdatePet(petId, newPetStatus);
+        expect(updatedPetResponse.data.status).to.equal(newPetStatus);
     });
 
     it("Should delete the pet", async function () {
