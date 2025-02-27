@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "ENV=qa mocha tests/*.js --reporter mocha-multi-reporters --reporter-options configFile=mocha-config.json",
+    "test": "ENV=qa.env mocha tests/*.js --reporter mocha-multi-reporters --reporter-options configFile=mocha-config.json",
     "merge-reports": "jrm ./reports -o ./reports/junit-report.xml"
   },
   "author": "",

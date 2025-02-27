@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "./qa.env" });
 
-const BASE_URL = process.env.BASE_URL || "https://petstore.swagger.io/v2";
+const BASE_URL = process.env.BASE_URL || "https://petstore.swagger.io";
 const API_VERSION = process.env.API_VERSION || "v2";
 
 const apiClient = axios.create({
