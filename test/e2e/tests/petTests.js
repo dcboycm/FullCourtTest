@@ -21,7 +21,20 @@ describe("🐾 Petstore API Tests", function () {
     });
 
     it("Should retrieve the created pet", async function () {
+        const petName = "Scrappy";
+        const petStatus = "pending";
+        const createPetResponse = await PetClient.createPet({
+            name: petName,
+            status: petStatus
+        })
+        expect(createPetResponse.status).to.equal(200);
+        expect(createPetResponse.data).to.have.property('id');
+        petId = createPetResponse.data.id;
 
+        const retrievePetResponse = await PetClient.getPetById(petId);
+        expect(retrievePetResponse).to.have.status(200);
+        expect(retrievePetResponse.data.name).to.equal(petName);
+        expect(retrievePetResponse.data.status).to.equal(petStatus);
     });
 
     it("Should update the pet's status", async function () {

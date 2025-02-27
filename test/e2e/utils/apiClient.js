@@ -23,7 +23,23 @@ export default class PetClient {
     static apiClient = apiClient
 
    static async createPet(petData) {
-    return this.apiClient.post('pet', petData)
+    try {
+        const response = await this.apiClient.post('pet', petData)
+        return response
+    } catch (error) {
+        console.error('Error creating pet:', error)
+        throw error
+    }
    }
-}
 
+   static async getPetById(petId) {
+    try {
+        const response = await this.apiClient.get(`pet/${petId}`)
+        return response
+    } catch (error) {
+        console.error('Error retrieving pet:', error)
+        throw error
+    }
+   }
+   
+}
