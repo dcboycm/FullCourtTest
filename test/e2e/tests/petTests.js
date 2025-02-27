@@ -74,4 +74,22 @@ describe("🐾 Petstore API Tests", function () {
         const retrievePetResponse = await PetClient.getPetById(petId);
         expect(retrievePetResponse.status).to.equal(404);
     });
+
+    it("Should not retrieve a pet with invalid id", async function () {
+        const invalidPetId = 0;
+        const retrievePetResponse = await PetClient.getPetById(invalidPetId);
+        expect(retrievePetResponse.status).to.equal(404);
+    });
+
+    it("Should not update a pet with invalid id", async function () {
+        const invalidPetId = 0;
+        const updatedPetResponse = await PetClient.postUpdatePet(invalidPetId, { status: "adopted" });
+        expect(updatedPetResponse.status).to.equal(415);
+    });
+
+    it("Should not delete a pet with invalid id", async function () {
+        const invalidPetId = 0;
+        const deletePetResponse = await PetClient.deletePet(invalidPetId);
+        expect(deletePetResponse.status).to.equal(404);
+    });
 });

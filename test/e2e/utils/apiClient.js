@@ -27,9 +27,12 @@ export default class PetClient {
 
    static async getPetById(petId) {
     try {
-        const response = await this.apiClient.get(`pet/${petId}`)
-        return response
+        const response = await this.apiClient.get(`pet/${petId}`);
+        return response;
     } catch (error) {
+        if (error.response) {
+            return error.response;
+        }
         throw new Error(`Error retrieving pet: ${error.message}`)
     }
    }
@@ -44,6 +47,9 @@ export default class PetClient {
         const response = await this.apiClient.post(`pet/${petId}`, formData)
         return response
     } catch (error) {
+        if (error.response) {
+            return error.response;
+        }
         throw new Error(`Error updating pet: ${error.message}`)
     }
    }
@@ -53,6 +59,9 @@ export default class PetClient {
         const response = await this.apiClient.delete(`pet/${petId}`)
         return response
     } catch (error) {
+        if (error.response) {
+            return error.response;
+        }
         throw new Error(`Error deleting pet: ${error.message}`)
     }
    }
