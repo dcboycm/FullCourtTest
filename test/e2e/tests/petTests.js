@@ -1,19 +1,9 @@
 import { expect } from "chai";
 import PetClient from "../utils/apiClient.js";
+import { createPet } from "../utils/testHelper.js";
 
 describe("🐾 Petstore API Tests", function () {
     let petId;
-
-    async function createPet(name, status) {
-        const response = await PetClient.postCreatePet({
-            name: name,
-            status: status
-        })
-        expect(response.status).to.equal(200);
-        expect(response.data).to.have.property('id');
-
-        return response.data;
-    }
 
     it("Should create a new pet", async function () {
         const petName = "Fluffy";

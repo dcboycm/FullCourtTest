@@ -34,15 +34,14 @@ export default class PetClient {
     }
    }
 
-   static async postUpdatePet(petId,status) {
+   static async postUpdatePet(petId,petData) {
     try {
         // 415 for form data payload
-        // const formData = new FormData()
-        // formData.append('status', encodeURIComponent(status))
-
-        // 415 for this formatted data
-        const data = `status=${encodeURIComponent(status)}`
-        const response = await this.apiClient.post(`pet/${petId}`, data)
+        const formData = new FormData()
+        for (const [key, value] of Object.entries(petData)) {
+            formData.append(key, encodeURIComponent(value))
+        }
+        const response = await this.apiClient.post(`pet/${petId}`, formData)
         return response
     } catch (error) {
         throw new Error(`Error updating pet: ${error.message}`)
