@@ -13,12 +13,6 @@ const apiClient = axios.create({
     }
 });
 
-// TODO: Implement the following functions in this file:
-// - createPet(petData)
-// - getPetById(petId)
-// - updatePet(petData)
-// - deletePet(petId)
-
 export default class PetClient {
     static apiClient = apiClient
 
@@ -52,6 +46,15 @@ export default class PetClient {
         return response
     } catch (error) {
         throw new Error(`Error updating pet: ${error.message}`)
+    }
+   }
+
+   static async deletePet(petId) {
+    try {
+        const response = await this.apiClient.delete(`pet/${petId}`)
+        return response
+    } catch (error) {
+        throw new Error(`Error deleting pet: ${error.message}`)
     }
    }
 }
