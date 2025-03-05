@@ -4,19 +4,29 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./qa.env" });
 
 const BASE_URL = process.env.BASE_URL || "https://petstore.swagger.io/v2";
-const API_VERSION = process.env.API_VERSION || "v2";
 
 const apiClient = axios.create({
-    baseURL: `${BASE_URL}/${API_VERSION}`,
+    baseURL: `${BASE_URL}`,
     headers: {
         "Content-Type": "application/json"
     }
 });
 
-// TODO: Implement the following functions in this file:
-// - createPet(petData)
-// - getPetById(petId)
-// - updatePet(petData)
-// - deletePet(petId)
+const createPet = async (petData) => {
 
+};
+
+const getPetById = async (petId) => {
+
+};
+
+const updatePet = async (petData) => {
+
+};
+
+const deletePet = async (petId) => {
+
+};
+
+export { createPet, getPetById, updatePet, deletePet };
 export default apiClient;
