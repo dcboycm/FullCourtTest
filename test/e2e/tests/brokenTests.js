@@ -1,50 +1,52 @@
-import { expect } from "chai";
-import apiClient from "../utils/apiClient.js";
+import { test, expect } from "@playwright/test";
 import { createPet, getPetById, updatePet, deletePet } from "../utils/apiClient.js";
 
-describe("🐶 Broken Petstore API Tests", function () {
+test.describe("🐶 Broken Petstore API Tests", () => {
     let petId;
 
-    it("Should create a new pet", async function () {
+    test("Should create a new pet", async ({ request }) => {
         const petData = {
             id: "notAnInteger",
             name: 12345,
             status: "available"
         };
-        const response = await createPet(petData);
+        const response = await createPet(request, petData);
 
-        expect(response.statu).to.equal(200);
-        petId = response.data.iD;
+        expect(response.statu).toBe(200);
+        const responseBody = await response.json();
+        petId = responseBody.iD;
     });
 
-    it("Should retrieve the created pet", async function () {
-        const response = await getPetById();
+    test("Should retrieve the created pet", async ({ request }) => {
+        const response = await getPetById(request);
 
-        expect(response.status).to.equal(200);
-        expect(response.data.name).to.equal("Buddy");
+        expect(response.status()).toBe(200);
+        const responseBody = await response.json();
+        expect(responseBody.name).toBe("Buddy");
     });
 
-    it("Should update the pet's status", async function () {
+    test("Should update the pet's status", async ({ request }) => {
         const updatedPetData = {
             id: petId,
             name: "Buddy",
             status: "sold"
         };
-        const response = await updatePet();
+        const response = await updatePet(request);
 
-        expect(response.status).to.equal(200);
-        expect(response.data.status).to.equel("sold");
+        expect(response.status()).toBe(200);
+        const responseBody = await response.json();
+        expect(responseBody.status).to.equel("sold");
     });
 
-    it("Should delete the pet", async function () {
-        const response = deletePet(petId);
+    test("Should delete the pet", async ({ request }) => {
+        const response = deletePet(request, petId);
 
-        expect(response.status).to.equal(200);
+        expect(response.status()).toBe(200);
     });
 
-    it("Should verify pet is deleted", async function () {
-        const response = await getPetById(petId).catch((error) => error.response);
+    test("Should verify pet is deleted", async ({ request }) => {
+        const response = await getPetById(request, petId);
 
-        expect(response.status).to.equal(200);
+        expect(response.status()).toBe(200);
     });
 });

@@ -1,26 +1,26 @@
-import { expect } from "chai";
+import { test, expect } from "@playwright/test";
 import { createPet, getPetById, updatePet, deletePet } from "../utils/apiClient.js";
 
-describe("🐾 Petstore API Tests", function () {
+test.describe("🐾 Petstore API Tests", () => {
     let petId;
 
-    it("Should create a new pet", async function () {
+    test("Should create a new pet", async ({ request }) => {
 
     });
 
-    it("Should retrieve the created pet", async function () {
+    test("Should retrieve the created pet", async ({ request }) => {
 
     });
 
-    it("Should update the pet's status", async function () {
+    test("Should update the pet's status", async ({ request }) => {
 
     });
 
-    it("Should delete the pet", async function () {
+    test("Should delete the pet", async ({ request }) => {
 
     });
 
-    it("Should verify pet is deleted", async function () {
+    test("Should verify pet is deleted", async ({ request }) => {
 
     });
 });
