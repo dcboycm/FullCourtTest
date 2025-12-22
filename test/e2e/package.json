@@ -5,18 +5,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "ENV=qa mocha tests/*.js --reporter mocha-multi-reporters --reporter-options configFile=mocha-config.json",
-    "merge-reports": "jrm ./reports -o ./reports/junit-report.xml"
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "axios": "^1.7.7",
-    "chai": "^5.1.2",
-    "dotenv": "^16.4.7",
-    "junit-report-merger": "^7.0.0",
-    "mocha": "^10.7.3",
-    "mocha-junit-reporter": "^2.2.1",
-    "mocha-multi-reporters": "^1.5.1"
+    "@playwright/test": "^1.41.0",
+    "dotenv": "^16.4.7"
   }
 }

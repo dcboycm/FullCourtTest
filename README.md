@@ -1,14 +1,14 @@
 # Introduction
-FullCourtTest is an API testing project skeleton for interviewing potential candidates. It uses Mocha, Chai, and Axios to send requests and verify responses, ensuring the API returns accurate and reliable data.
+FullCourtTest is an API testing project skeleton for interviewing potential candidates. It uses Playwright to send requests and verify responses, ensuring the API returns accurate and reliable data.
 
 # Features
-- 🚀 Automated API tests with Mocha & Chai
+- 🚀 Automated API tests with Playwright
 - 🔍 Validates understanding of testing API's
 - 📊 Generates JUnit test reports for analysis
 - 🔐 Supports environment variables with dotenv
 
 # Objective
-Your task is to implement API test cases for the [Petstore API](https://petstore.swagger.io/#/) using Node.js with Mocha, Chai, and Axios. You will also be required to debug and fix a broken test.
+Your task is to implement API test cases for the [Petstore API](https://petstore.swagger.io/#/) using Node.js with Playwright. You will also be required to debug and fix a broken test.
 
 # Getting Started
 1.	Clone the repository
